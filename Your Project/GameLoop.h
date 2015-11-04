@@ -9,8 +9,10 @@
 #ifndef _GAMELOOP_H_
 #define _GAMELOOP_H_
 
+#include "Vecter3.h"
 #include "Graphics.h"
 #include "EventHandler.h"
+
 
 // This is called inheritance
 // The GameLoop class inherits every member variable and function from 'EventHandler'
@@ -24,8 +26,11 @@ class GameLoop : private EventHandler
 {
 private:
 	bool m_bRunning; // If this is true, the game loop will continue to run
-
+	bool control = false;
 public:
+	int iHorizontel = 0, iVertical = 0, iVer, iHor ;
+	int iUP = -1, iDOWN = 0, iCount = 10;
+	const int  iRadios = 100;
 	// The game loop
 	void Loop();
 
@@ -36,7 +41,12 @@ public:
 
 	// An update-like function that gets called directly after 'LateUpdate'
 	void Draw();
+	
+	//// Horizantel Input declared 
+	//void OnHorizontel(const SDL_Keycode, const Uint16, const SDL_Scancode);
 
+	//void OnVertical(const SDL_Keycode, const Uint16, const SDL_Scancode);
+	//
 	// Gets called automatically by 'EventHandler' when a key is pressed
 	void OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode);
 	// Gets called automatically by 'EventHandler' when a key is released
