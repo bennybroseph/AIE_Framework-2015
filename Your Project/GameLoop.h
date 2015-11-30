@@ -10,8 +10,12 @@
 #define _GAMELOOP_H_
 
 #include "Vecter3.h"
+#include "Vecter2.h"
 #include "Graphics.h"
 #include "EventHandler.h"
+#include <ctime>
+#include <stdlib.h>
+#include <time.h>
 
 
 // This is called inheritance
@@ -26,13 +30,18 @@ class GameLoop : private EventHandler
 {
 private:
 	bool m_bRunning; // If this is true, the game loop will continue to run
-	bool control = false;
+	bool control = false, bUpDownL = false, bUpDownR = false, bDownUpR = false, bDownUpL = false;
+	bool bCollisionL = false, bCollisionR = false, bCollisionUp = false, bCollisionDown = false, bRest = false;
 public:
-	int iHorizontel = 0, iVertical = 0, iVer, iHor ;
-	int iUP = -1, iDOWN = 0, iCount = 10;
-	const int  iRadios = 100;
+	
+
+	float fCurrentT = 0, fPreviouseT = 0, fUpDownL = 0, fUpDownR = 0, fPaddleR, fPaddleL;
+	int iUP = -1, iDOWN = 0;
+	int iRandNumL = 0, iRandNumR = 0, iRandNumU = 0, iRandNumD = 0;
+	const int  iRadios = 50, iSPEED = 10, iALTSPEED = 5;
 	// The game loop
 	void Loop();
+
 
 	// An update function that gets called directly after input is parsed
 	void Update();
@@ -42,11 +51,6 @@ public:
 	// An update-like function that gets called directly after 'LateUpdate'
 	void Draw();
 	
-	//// Horizantel Input declared 
-	//void OnHorizontel(const SDL_Keycode, const Uint16, const SDL_Scancode);
-
-	//void OnVertical(const SDL_Keycode, const Uint16, const SDL_Scancode);
-	//
 	// Gets called automatically by 'EventHandler' when a key is pressed
 	void OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode);
 	// Gets called automatically by 'EventHandler' when a key is released
