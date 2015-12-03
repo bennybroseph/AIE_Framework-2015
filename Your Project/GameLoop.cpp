@@ -1,13 +1,24 @@
 #include "GameLoop.h"
 
 
-int iHorizontel = 0, iVertical = 0, iVer = 450, iHor = 800, fDeltaTime = 0, iTally = 0;
+
+
+
+
+
+
+Vector2<int> V2BallSize1(50, 50);
+Vector2<int> V2BallSize2(50, 50);
+
+Vector3<int> V3BallLocation1(900,450, 200);
+Vector3<int> V3BallLocation2(750, 450, 200);
+int iHorizontel = 0, iVertical = 0, fDeltaTime = 0, iTally = 0;
 void GameLoop::Loop()
 
 {
 
 	SDL_Event sdlEvent; // Will hold the next event to be parsed
-	
+
 	while (m_bRunning)
 	{
 		
@@ -26,128 +37,17 @@ void GameLoop::Loop()
 		//delta time 
 		fCurrentT = clock();
 		fDeltaTime = (fCurrentT - fPreviouseT)/10;
+		
+		// bad collision detection
 		//if (!(iVer == (0 + iRadios) || iHor == (0 + iRadios)))
-			if (control)
-			{
-				int iIncramet = iTally + fDeltaTime * iSPEED;
-				std::cout << iHor << std::endl;
-				iVer  += -iTally * fDeltaTime;
-			/*	srand(time(NULL));
-				int iRandNum = rand() % 3;*/
-				if (iHor < 20)
-				{
-					bCollisionL = true; bCollisionR = false; bCollisionDown = false; bCollisionUp = false;
-				}
-				
-				if (iHor > 1580)
-				{
-					bCollisionR = true; bCollisionL = false; bCollisionDown = false; bCollisionUp = false;
-				}
-				if (iVer < 10)
-				{
-					bCollisionUp = true; bCollisionL = false; bCollisionR = false; bCollisionDown = false;
-				}
-				if( iVer > 900) 
-				{
-					bCollisionDown = true; bCollisionUp = false; bCollisionL = false; bCollisionR = false; 
-				}
-				
-				if (bCollisionL)
-				{
-					
-					srand(time(NULL));
-					iRandNumL = rand() % 3;
-					std::cout << "LEFT ACTIVE: " <<  iRandNumD << std::endl;
-					
-					switch(iRandNumL)
-					{ 
-					case 0:
-						iHor += iIncramet;
-						break;
-					case 1:
-					
-						iHor += iIncramet;
-						iVer += iIncramet;
-						break;
-					case 2:
-						iHor += iIncramet;
-						iVer += -iIncramet;
-						break;
-					}
-
-				}
-				else if (bCollisionR)
-				{
-
-					srand(time(NULL));
-					iRandNumR = rand() % 3;
-					std::cout << "RIGHT ACTIVE: " << iRandNumR << std::endl;
-
-					switch(iRandNumR)
-					{
-						iHor += -iIncramet;
-						break;
-					
-					case 1:
-					
-						iHor += -iIncramet;
-						iVer += -iIncramet;
-						break;
-					case 2:
-					
-						iHor += -iIncramet;
-						iVer += iIncramet;
-						break;
-					}
-				}
-
-				else if (bCollisionUp)
-				{
-					
-					srand(time(NULL));
-					iRandNumU = rand() % 3;
-					std::cout << "UP ACTIVE: " << iRandNumD << std::endl;
-
-					switch (iRandNumU)
-					{
-					case 0:
-						iVer += iTally + fDeltaTime * iSPEED;
-						break;
-					case 1:
-						iHor += iIncramet;
-						iVer += iIncramet;
-						break;
-					case 2:
-						iHor += -iIncramet;
-						iVer += iIncramet;
-						break;
-					}
-				}
-
-				else if (bCollisionDown)
-				{
-					
-					srand(time(NULL));
-					iRandNumD = rand() % 3;
-					std::cout << "DOWN ACTIVE: " << iRandNumD << std::endl;
-
-					switch(iRandNumD)
-					{
-					case 0:
-						iVer += -iIncramet;
-						break;
-					case 1:
-						iHor += -iIncramet;
-						iVer += iIncramet;
-						break;
-					case 2:
-						iHor += -iIncramet;
-						iVer += -iIncramet;
-						break;
-					}
-				}
-					
-			}
+		//	if (control)
+		//	{
+		//		int iIncramet = iTally + fDeltaTime * iSPEED;
+		//		std::cout << iHor << std::endl;
+		//		iVer  += -iTally * fDeltaTime;
+		//	/*	srand(time(NULL));
+		//		int iRandNum = rand() % 3;*/
+		
 		fPreviouseT = fCurrentT;
 
 		if (bUpDownL)
@@ -191,9 +91,9 @@ void GameLoop::Draw()
 	// just like a painter would paint onto a canvas
 
 	//Graphics::DrawRect({ 400, 400 }, { 450, 400 }, { 160, 65, 255, 255 });
-	Graphics::DrawRect({ 1585,  fPaddleR = (5 + fUpDownR )}, { 10, 300 }, { 350 ,0, 0, 255 });
+	//Graphics::DrawRect({ 1585,  fPaddleR = (5 + fUpDownR )}, { 10, 300 }, { 255 ,0, 0, 255 });
 
-	Graphics::DrawRect({ 5, fPaddleL = (5 + fUpDownL) }, { 10, 300 }, { 100,0, 350, 255 });
+	//Graphics::DrawRect({ 5, fPaddleL = (5 + fUpDownL) }, { 10, 300 }, { 0, 0, 255, 255 });
 
 	/*Graphics::DrawLine({ 10, 10 }, { 100, 100 }, { 255, 255, 255, 255 });*/
 	//Graphics::DrawPoint({ 5, 5 }, { 255, 255, 255, 255 });
@@ -202,33 +102,56 @@ void GameLoop::Draw()
 	Graphics::DrawCircle({ (800 + iHorizontel), (450 + iVertical) }, 200, 50, { 0, 100, 255, 150 })*/;
 
 	/*Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });*/
-	Graphics::DrawCircle({ iHor , iVer }, iRadios, 50 + iHorizontel, { 100, 255, 255, 150 });
+	if (Intropolation) {
+		V3BallLocation1 =   V3BallLocation1%V3BallLocation1;
+		V3BallLocation2 = V3BallLocation1 % V3BallLocation1;
+	}
+	if (bRest)
+	{
+		Intropolation = false;
+		V3BallLocation1.XX = 900;
+		V3BallLocation1.YY = 450;
+		V3BallLocation2.XX = 750;
+		V3BallLocation2.YY = 450;
+
+		Vector2<int> V2BallSize1(50, 50);
+		Vector2<int> V2BallSize2(50, 50);
+		bRest = false;
+	}
+	Graphics::DrawCircle({ V3BallLocation1.XX , V3BallLocation1.YY }, V2BallSize1.XX, V2BallSize1.YY, { 0, 255, 0, V3BallLocation1.ZZ });
+
+	Graphics::DrawCircle({ V3BallLocation2.XX , V3BallLocation2.YY }, V2BallSize2.XX, V2BallSize2.YY , { 255, 0, 0, V3BallLocation2.ZZ });
 }
 
 void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
 {
 	printf("%s\n", SDL_GetKeyName(ac_sdlSym));
-	Vector3<int> Dude(2, 34, 5);
-	Vector3<int> Dude2(2, 34, 5);
-	Vector3<int> Dude3(0, 0, 0);
+
 
 	
-	Dude3 = Dude2 ^ Dude;
-	/*std::cout << iRandNum << std::endl;*/
-	
-
+	 
 	switch (ac_sdlSym)
 	{
 	default: printf("%s\n", SDL_GetKeyName(ac_sdlSym)); break;
 	case SDLK_ESCAPE: m_bRunning = false; break; // End the loop
-	case SDLK_LEFT: iHorizontel += 1; break;
-	case SDLK_RIGHT: iHorizontel -= 1; break; 
-	case SDLK_DOWN: bDownUpR = true; break;
-	case SDLK_UP: bUpDownR = true; break;
+	case SDLK_LEFT: V3BallLocation1.XX += 1; break;
+	case SDLK_RIGHT: V3BallLocation1.XX -= 1; break; 
+	case SDLK_DOWN: V3BallLocation1.YY += 1; break;
+	case SDLK_UP: V3BallLocation1.YY -= 1; break;
+	case SDLK_a: if (Choose)
+	{
+		V2BallSize1.XX += 10;
+	}
+	else V2BallSize2.XX += 10; break;
+	case SDLK_d: V2BallSize1.XX -= 10; break;
 	case SDLK_SPACE: control = true; break;
 	case SDLK_w: bUpDownL = true; break;
 	case SDLK_s: bDownUpL = true; break;
-	case SDLK_r: control = false; iHor = 800; iVer = 450; bCollisionL = false; bCollisionR = false; bCollisionDown = false; bCollisionUp = false; break;
+	case SDLK_t: Add = true; break;
+	case SDLK_c: Choose = true; break; 
+	case SDLK_r: bRest = true; break;
+	case SDLK_i: Intropolation = true; break;
+	
 
 
 
@@ -254,6 +177,7 @@ void GameLoop::OnKeyUp(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const
 	case SDLK_w: bUpDownL = false; break;
 	case SDLK_s: bDownUpL = false; break;
 	case SDLK_SPACE: iTally = 10; break;
+	case SDLK_c: Choose = false; break;
 	default: break;
 	}
 }

@@ -77,11 +77,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\include\SDL;$(ProjectDir)\Dependencies\include\OpenGL;$(ProjectDir)\Dependencies\include\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Dependencies\include\SDL;$(ProjectDir)\Dependencies\include\OpenGL;$(ProjectDir)\Dependencies\include\Graphics;C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\lib;$(ProjectDir)\Dependencies\lib\SDL;$(ProjectDir)\Dependencies\lib\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\lib;$(ProjectDir)\Dependencies\lib\SDL;C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\lib\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL-OpenGL Student Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -105,7 +105,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\include\SDL;$(ProjectDir)\Dependencies\include\OpenGL;$(ProjectDir)\Dependencies\include\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Dependencies\include\SDL;$(ProjectDir)\Dependencies\include\OpenGL;$(ProjectDir)\Dependencies\include\Graphics;C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>None</DebugInformationFormat>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -114,7 +114,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\lib;$(ProjectDir)\Dependencies\lib\SDL;$(ProjectDir)\Dependencies\lib\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\lib;$(ProjectDir)\Dependencies\lib\SDL;C:\Users\william.montero\Desktop\AIE_Framework-2015\Vector Math Library;$(ProjectDir)\Dependencies\lib\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL-OpenGL Student Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkStatus>true</LinkStatus>
       <UACUIAccess>true</UACUIAccess>
