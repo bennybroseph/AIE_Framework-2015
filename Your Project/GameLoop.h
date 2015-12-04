@@ -32,13 +32,14 @@ class GameLoop : private EventHandler
 private:
 	bool m_bRunning; // If this is true, the game loop will continue to run
 	bool control = false, bUpDownL = false, bUpDownR = false, bDownUpR = false, bDownUpL = false, Add = false;
-	bool Choose = false, Intropolation = false, bRest = false;
+	bool Choose = true, Intropolation = false, bRest = false, Paint = false, Sub = false,Dot = false,Cross = false;
+	string Color = "#FFABFF";
 public:
 	
 	float fCurrentT = 0, fPreviouseT = 0, fUpDownL = 0, fUpDownR = 0, fPaddleR, fPaddleL;
 	int iUP = -1, iDOWN = 0;
 	int iRandNumL = 0, iRandNumR = 0, iRandNumU = 0, iRandNumD = 0;
-	const int iSPEED = 10, iALTSPEED = 5;
+	const int iSPEED = 5, iALTSPEED = 5;
 	// The game loop
 	void Loop();
 

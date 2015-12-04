@@ -6,9 +6,11 @@
 
 
 
-
+Vector4<int> V4BallColor1;
+ 
 Vector2<int> V2BallSize1(50, 50);
 Vector2<int> V2BallSize2(50, 50);
+Vector3<int> V3BallLocation3(0, 0, 0);
 
 Vector3<int> V3BallLocation1(900,450, 200);
 Vector3<int> V3BallLocation2(750, 450, 200);
@@ -77,7 +79,37 @@ void GameLoop::Loop()
 
 void GameLoop::Update()
 {
-	
+	if (Intropolation)
+		V3BallLocation3  = V3BallLocation1 % V3BallLocation1;
+	if (Add) 
+		V3BallLocation3 = V3BallLocation1 + V3BallLocation2;
+	if(Sub)
+		V3BallLocation3 = V3BallLocation1 - V3BallLocation2;
+	if(Cross)
+		V3BallLocation3 = V3BallLocation1 ^ V3BallLocation2;
+	if (bRest)
+	{
+		
+		V3BallLocation1.XX = 900;
+		V3BallLocation1.YY = 450;
+		V3BallLocation2.XX = 750;
+		V3BallLocation2.YY = 450;
+
+
+
+		Color = "#FFABFF";
+		V2BallSize1.XX = 50;
+		V2BallSize1.YY = 50;
+		V2BallSize2.XX = 50;
+		V2BallSize2.YY = 50;
+
+		bRest = false;
+		Intropolation = false;
+		Add = false;
+		Sub = false;
+		Cross = false;
+
+	}
 }
 void GameLoop::LateUpdate()
 {
@@ -102,25 +134,26 @@ void GameLoop::Draw()
 	Graphics::DrawCircle({ (800 + iHorizontel), (450 + iVertical) }, 200, 50, { 0, 100, 255, 150 })*/;
 
 	/*Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });*/
-	if (Intropolation) {
-		V3BallLocation1 =   V3BallLocation1%V3BallLocation1;
-		V3BallLocation2 = V3BallLocation1 % V3BallLocation1;
-	}
-	if (bRest)
-	{
-		Intropolation = false;
-		V3BallLocation1.XX = 900;
-		V3BallLocation1.YY = 450;
-		V3BallLocation2.XX = 750;
-		V3BallLocation2.YY = 450;
 
-		Vector2<int> V2BallSize1(50, 50);
-		Vector2<int> V2BallSize2(50, 50);
-		bRest = false;
-	}
-	Graphics::DrawCircle({ V3BallLocation1.XX , V3BallLocation1.YY }, V2BallSize1.XX, V2BallSize1.YY, { 0, 255, 0, V3BallLocation1.ZZ });
+if (Paint)
+{
+	std::cout << "Enter Hexa Color value(Most start in with #): "; 
+	std::cin >> Color;
+	Paint = false;
+}
+		
+	Graphics::DrawCircle({ V3BallLocation1.XX , V3BallLocation1.YY },
+	V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal(Color).RR,
+	V4BallColor1.Hexadecimal(Color).GG, V4BallColor1.Hexadecimal(Color).BB,
+	V4BallColor1.Hexadecimal(Color).AA });
 
-	Graphics::DrawCircle({ V3BallLocation2.XX , V3BallLocation2.YY }, V2BallSize2.XX, V2BallSize2.YY , { 255, 0, 0, V3BallLocation2.ZZ });
+	Graphics::DrawCircle({ V3BallLocation2.XX , V3BallLocation2.YY },
+	V2BallSize2.XX, V2BallSize2.YY , { 255, 0, 0, V3BallLocation2.ZZ });
+
+	Graphics::DrawCircle({ V3BallLocation3.XX , V3BallLocation3.YY },
+		V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal("#FFABFF").RR,
+		V4BallColor1.Hexadecimal("#FFABFF").GG, V4BallColor1.Hexadecimal("#FFABFF").BB,
+		V4BallColor1.Hexadecimal("#FFABFF").AA });
 }
 
 void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
@@ -134,38 +167,33 @@ void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, con
 	{
 	default: printf("%s\n", SDL_GetKeyName(ac_sdlSym)); break;
 	case SDLK_ESCAPE: m_bRunning = false; break; // End the loop
-	case SDLK_LEFT: V3BallLocation1.XX += 1; break;
-	case SDLK_RIGHT: V3BallLocation1.XX -= 1; break; 
-	case SDLK_DOWN: V3BallLocation1.YY += 1; break;
-	case SDLK_UP: V3BallLocation1.YY -= 1; break;
-	case SDLK_a: if (Choose)
-	{
-		V2BallSize1.XX += 10;
-	}
+	case SDLK_LEFT:if (Choose) { V3BallLocation1.XX -= iSPEED; }
+	else V3BallLocation2.XX -= iSPEED; break;
+	case SDLK_RIGHT: if (Choose) { V3BallLocation1.XX += iSPEED; }
+	else V3BallLocation2.XX += iSPEED; break;
+	case SDLK_DOWN: if (Choose) { V3BallLocation1.YY += iSPEED; }
+	else V3BallLocation2.YY += iSPEED; break;
+	case SDLK_UP: if (Choose) { V3BallLocation1.YY -= iSPEED; }
+	else V3BallLocation2.YY -= iSPEED; break;
+	case SDLK_a: if (Choose) { V2BallSize1.XX += 10; }
 	else V2BallSize2.XX += 10; break;
 	case SDLK_d: V2BallSize1.XX -= 10; break;
 	case SDLK_SPACE: control = true; break;
 	case SDLK_w: bUpDownL = true; break;
 	case SDLK_s: bDownUpL = true; break;
 	case SDLK_t: Add = true; break;
-	case SDLK_c: Choose = true; break; 
+	case SDLK_c: Choose = false; break; 
 	case SDLK_r: bRest = true; break;
 	case SDLK_i: Intropolation = true; break;
+	case SDLK_p: Paint = true; break;
+	case SDLK_6: Cross = true; break;
+	case SDLK_EQUALS: Add = true; break;
+	case SDLK_MINUS: Sub = true; break;
 	
 
 
 
 	}
-	//if(ac_sdlSym == SDLK_DOWN)
-	//	fUpDownR += 10;
-	//if(ac_sdlSym == SDLK_UP)
-	//	fUpDownR -= 10;
-	//if(ac_sdlSym == SDLK_w)
-	//	fUpDownL -= 10;
-	//if(ac_sdlSym == SDLK_s)
-	//	fUpDownL += 10;
-
-
 
 }
 void GameLoop::OnKeyUp(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
@@ -177,7 +205,13 @@ void GameLoop::OnKeyUp(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const
 	case SDLK_w: bUpDownL = false; break;
 	case SDLK_s: bDownUpL = false; break;
 	case SDLK_SPACE: iTally = 10; break;
-	case SDLK_c: Choose = false; break;
+	case SDLK_c: Choose = true; break;
+	case SDLK_r: bRest = false; break;
+	case SDLK_i: Intropolation = false; break;
+	case SDLK_p: Paint = false; break;
+	case SDLK_6: Cross = false; break;
+	case SDLK_EQUALS: Add = false; break;
+	case SDLK_MINUS: Sub = false; break;
 	default: break;
 	}
 }
