@@ -36,10 +36,10 @@ private:
 	string Color = "#FFABFF";
 public:
 	
-	float fCurrentT = 0, fPreviouseT = 0, fUpDownL = 0, fUpDownR = 0, fPaddleR, fPaddleL;
+	float fCurrentT = 0, fPreviouseT = 0, fUpDownL = 0, fUpDownR = 0, fPaddleR, fPaddleL ,iSPEED = 5 ;
 	int iUP = -1, iDOWN = 0;
 	int iRandNumL = 0, iRandNumR = 0, iRandNumU = 0, iRandNumD = 0;
-	const int iSPEED = 5, iALTSPEED = 5;
+	const int  iALTSPEED = 5;
 	// The game loop
 	void Loop();
 

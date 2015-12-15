@@ -6,19 +6,23 @@
 
 
 
-Vector4<int> V4BallColor1;
+Vector4<float> V4BallColor1;
  
-Vector2<int> V2BallSize1(50, 50);
-Vector2<int> V2BallSize2(50, 50);
-Vector3<int> V3BallLocation3(0, 0, 0);
+Vector2<float> V2BallSize1(50, 50);
+Vector2<float> V2BallSize2(50, 50);
+Vector2<float> V2BallSize3(5, 5);
+Vector2<float> V2BallSize4( 0, 0);
 
-Vector3<int> V3BallLocation1(900,450, 200);
-Vector3<int> V3BallLocation2(750, 450, 200);
+Vector3<float> V3BallLocation1(900,450, 200);
+Vector3<float> V3BallLocation2(750, 450, 200);
+Vector3<float> V3BallLocation3(0, 0, 0);
 int iHorizontel = 0, iVertical = 0, fDeltaTime = 0, iTally = 0;
 void GameLoop::Loop()
-
 {
-
+	if (control)
+		std::cout << "Collide Confimed GO HOME" << std::endl;
+	else
+		std::cout << std::endl;
 	SDL_Event sdlEvent; // Will hold the next event to be parsed
 
 	while (m_bRunning)
@@ -79,6 +83,21 @@ void GameLoop::Loop()
 
 void GameLoop::Update()
 {
+	Vector2 <float> p1(V3BallLocation2.XX, (V3BallLocation2.YY + 100));
+	Vector2 <float> p4((V3BallLocation2.XX + 100), V3BallLocation2.YY);
+
+
+	Vector2<float> z1(V3BallLocation1.XX, (V3BallLocation1.YY + 100));
+	Vector2<float> z4((V3BallLocation1.XX + 100), V3BallLocation1.YY);
+
+	control = false;
+	if ((p4.XX >= z1.XX && z1.XX <= p4.XX) && p4.YY )
+		control = true;
+	if (z4.YY >= p1.YY && z1.YY <= p4.YY)
+		control = true;
+	
+
+
 	if (Intropolation)
 		V3BallLocation3  = V3BallLocation1 % V3BallLocation1;
 	if (Add) 
@@ -94,7 +113,9 @@ void GameLoop::Update()
 		V3BallLocation1.YY = 450;
 		V3BallLocation2.XX = 750;
 		V3BallLocation2.YY = 450;
-
+		V3BallLocation3.XX = 0;
+		V3BallLocation3.YY = 0;
+		V2BallSize1.Radions();
 
 
 		Color = "#FFABFF";
@@ -125,44 +146,47 @@ void GameLoop::Draw()
 	//Graphics::DrawRect({ 400, 400 }, { 450, 400 }, { 160, 65, 255, 255 });
 	//Graphics::DrawRect({ 1585,  fPaddleR = (5 + fUpDownR )}, { 10, 300 }, { 255 ,0, 0, 255 });
 
-	//Graphics::DrawRect({ 5, fPaddleL = (5 + fUpDownL) }, { 10, 300 }, { 0, 0, 255, 255 });
+	Graphics::DrawRect({ V3BallLocation1.XX  , V3BallLocation1.YY }, { 100, 100 }, { 255, 0, 255, 100 });
+	Graphics::DrawRect({ V3BallLocation2.XX , V3BallLocation2.YY }, { 100, 100 }, { 0, 0, 255, 100 });
 
-	/*Graphics::DrawLine({ 10, 10 }, { 100, 100 }, { 255, 255, 255, 255 });*/
+	Graphics::DrawCircle({ 1000,550 },  1,450, { 225,225,225,225 });
+
+	for (float line = 5; line < 1800; line+=5 )
+	{
+		for (float liner = 10; liner < 900;liner+=5)
+			Graphics::DrawLine({ line, liner }, { 100, 100 }, { 255, 255, 255, 255 });
+	}
+		
 	//Graphics::DrawPoint({ 5, 5 }, { 255, 255, 255, 255 });
 
-	/*Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });
-	Graphics::DrawCircle({ (800 + iHorizontel), (450 + iVertical) }, 200, 50, { 0, 100, 255, 150 })*/;
+	//Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });
+	//Graphics::DrawCircle({ (800 + iHorizontel), (450 + iVertical) }, 200, 50, { 0, 100, 255, 150 });
 
 	/*Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });*/
 
-if (Paint)
-{
-	std::cout << "Enter Hexa Color value(Most start in with #): "; 
-	std::cin >> Color;
-	Paint = false;
-}
-		
-	Graphics::DrawCircle({ V3BallLocation1.XX , V3BallLocation1.YY },
-	V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal(Color).RR,
-	V4BallColor1.Hexadecimal(Color).GG, V4BallColor1.Hexadecimal(Color).BB,
-	V4BallColor1.Hexadecimal(Color).AA });
-
-	Graphics::DrawCircle({ V3BallLocation2.XX , V3BallLocation2.YY },
-	V2BallSize2.XX, V2BallSize2.YY , { 255, 0, 0, V3BallLocation2.ZZ });
-
-	Graphics::DrawCircle({ V3BallLocation3.XX , V3BallLocation3.YY },
-		V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal("#FFABFF").RR,
-		V4BallColor1.Hexadecimal("#FFABFF").GG, V4BallColor1.Hexadecimal("#FFABFF").BB,
-		V4BallColor1.Hexadecimal("#FFABFF").AA });
+//if (Paint)
+//{
+//	std::cout << "Enter Hexa Color value(Most start in with #): "; 
+//	std::cin >> Color;
+//	Paint = false;
+//}
+//		
+	//Graphics::DrawCircle({ V3BallLocation1.XX , V3BallLocation1.YY },
+	//V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal(Color).RR,
+	//V4BallColor1.Hexadecimal(Color).GG, V4BallColor1.Hexadecimal(Color).BB,
+	//V4BallColor1.Hexadecimal(Color).AA });
+//
+	Graphics::DrawCircle({ V3BallLocation2.XX + 50 , V3BallLocation2.YY + 50 },V2BallSize2.XX, V2BallSize2.YY , { 255, 0, 0,100 });
+//
+//	Graphics::DrawCircle({ V3BallLocation3.XX , V3BallLocation3.YY },
+//	V2BallSize1.XX, V2BallSize1.YY, { V4BallColor1.Hexadecimal("#FFABFF").RR,
+//	V4BallColor1.Hexadecimal("#FFABFF").GG, V4BallColor1.Hexadecimal("#FFABFF").BB,
+//	V4BallColor1.Hexadecimal("#FFABFF").AA });
 }
 
 void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
 {
 	printf("%s\n", SDL_GetKeyName(ac_sdlSym));
-
-
-	
-	 
 	switch (ac_sdlSym)
 	{
 	default: printf("%s\n", SDL_GetKeyName(ac_sdlSym)); break;
@@ -175,12 +199,13 @@ void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, con
 	else V3BallLocation2.YY += iSPEED; break;
 	case SDLK_UP: if (Choose) { V3BallLocation1.YY -= iSPEED; }
 	else V3BallLocation2.YY -= iSPEED; break;
-	case SDLK_a: if (Choose) { V2BallSize1.XX += 10; }
-	else V2BallSize2.XX += 10; break;
-	case SDLK_d: V2BallSize1.XX -= 10; break;
+	case SDLK_a: if (Choose) { V2BallSize2.XX += 10; }
+	else V2BallSize1.XX += 10; break;
+	case SDLK_d:if (Choose) { V2BallSize2.XX -= 10; }
+	else V2BallSize1.XX -= 10; break;
 	case SDLK_SPACE: control = true; break;
 	case SDLK_w: bUpDownL = true; break;
-	case SDLK_s: bDownUpL = true; break;
+	case SDLK_s: Sub = true; break;
 	case SDLK_t: Add = true; break;
 	case SDLK_c: Choose = false; break; 
 	case SDLK_r: bRest = true; break;
@@ -200,7 +225,7 @@ void GameLoop::OnKeyUp(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const
 {
 	switch (ac_sdlSym)
 	{
-	case SDLK_DOWN: bDownUpR = false; break;
+	case SDLK_DOWN: bDownUpR = false;  break;
 	case SDLK_UP: bUpDownR = false; break;
 	case SDLK_w: bUpDownL = false; break;
 	case SDLK_s: bDownUpL = false; break;

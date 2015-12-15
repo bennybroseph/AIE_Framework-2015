@@ -75,9 +75,9 @@ Vector4<T> Vector4<T>::Hexadecimal(string UserInput)
 	Vector4<T> TempVariable;
 	if (UserInput[0] == '#')
 	{
-		int TempArray[8];
+		int TempArray[6];
 		Vector4<T> TempVariable;
-		for (int i = 1; i <= 8; ++i)
+		for (int i = 1; i <= 6; ++i)
 			TempArray[i - 1] = (int(UserInput[i]));
 
 		for (int j = 0; j < 6; ++j)
@@ -93,7 +93,7 @@ Vector4<T> Vector4<T>::Hexadecimal(string UserInput)
 		TempVariable.RR = (TempArray[0] * 16) + TempArray[1];
 		TempVariable.GG = (TempArray[2] * 16) + TempArray[3];
 		TempVariable.BB = (TempArray[4] * 16) + TempArray[5];
-		TempVariable.AA = (TempArray[7] * 16) + TempArray[8];
+		TempVariable.AA = 255;
 		
 		return TempVariable;
 	}
