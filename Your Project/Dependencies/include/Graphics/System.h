@@ -2,8 +2,8 @@
 // File: System.h
 // Author: Ben Odom
 // Brief: Holds the necessary structs for 2D graphics. Uses
-//		  2D points, sizes/dimensions, velocity/angular 
-//		  velocity, and colors. Also hold some overloaded 
+//		  2D points, sizes/dimensions, velocity/angular
+//		  velocity, and colors. Also hold some overloaded
 //		  operators for adding points or sizes together.
 //////////////////////////////////////////////////////////////
 
@@ -47,7 +47,7 @@ namespace System
 		// Division of two 'Point2D's
 		template <typename T, typename U>
 		friend const Point2D<T> operator/(const Point2D<T>& ac_PointA, const Point2D<U>& ac_PointB);
-		
+
 		// Division of a 'Point2D' and an integer; ex: "HalfofA = PointA / 2;"
 		template <typename T>
 		friend const Point2D<T> operator/(const Point2D<T>& ac_PointA, const int ac_iNum);

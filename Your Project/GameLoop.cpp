@@ -6,7 +6,7 @@ void GameLoop::Loop()
 {
 	SDL_Event sdlEvent; // Will hold the next event to be parsed
 
-	while (m_bRunning)
+	while (m_Running)
 	{
 		// Events get called one at a time, so if multiple things happen in one frame, they get parsed individually through 'SDL_PollEvent'
 		// The next event to parse gets stored into 'sdlEvent', and then passed to the 'EventHandler' class which will call it's appropriate function here
@@ -42,41 +42,40 @@ void GameLoop::Draw()
 	// Objects are drawn in a painter's layer fashion meaning the first object drawn is on the bottom, and the last one drawn is on the top
 	// just like a painter would paint onto a canvas
 
-	Graphics::DrawRect({ 400, 400 }, { 450, 400 }, { 160, 65, 255, 255 });
-	Graphics::DrawRect({ 250, 500 }, { 1000, 200 }, { 0, 255, 0, 255 });
+	Graphics::DrawRect(Vector2(400.f, 400.f), Vector2(450.f, 400.f), Vector4(160.f, 65.f, 255.f, 255.f));
+	Graphics::DrawRect(Vector2(250.f, 500.f), Vector2(1000, 200), Vector4(0.f, 255.f, 0.f, 255.f));
 
-	Graphics::DrawLine({ 10, 10 }, { 100, 100 }, { 255, 255, 255, 255 });
-	Graphics::DrawPoint({ 5, 5 }, { 255, 255, 255, 255 });
+	Graphics::DrawLine(Vector2(10.f, 10.f), Vector2(100.f, 100.f), Vector4(255.f, 255.f, 255.f, 255.f));
+	Graphics::DrawPoint(Vector2(5.f, 5.f), Vector4(255.f, 255.f, 255.f, 255.f));
 
-	Graphics::DrawRing({ 140, 140 }, 50, 25, { 50, 0, 200, 255 });
-	Graphics::DrawCircle({ 800, 450 }, 200, 50, { 0, 255, 255, 150 });
+	Graphics::DrawRing(Vector2(140.f, 140.f), 50.f, 25.f, Vector4(50.f, 0.f, 200.f, 255.f));
+	Graphics::DrawCircle(Vector2(800.f, 450.f), 200.f, 50.f, Vector4(0.f, 255.f, 255.f, 150.f));
 }
 
-void GameLoop::OnKeyDown(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
+void GameLoop::OnKeyDown(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode)
 {
-
-	switch (ac_sdlSym)
+	switch (symbol)
 	{
-	case SDLK_ESCAPE: m_bRunning = false; break; // End the loop
+	case SDLK_ESCAPE: m_Running = false; break; // End the loop
 
-	default: printf("%s\n", SDL_GetKeyName(ac_sdlSym)); break;
+	default: printf("%s\n", SDL_GetKeyName(symbol)); break;
 	}
 }
-void GameLoop::OnKeyUp(const SDL_Keycode ac_sdlSym, const Uint16 ac_uiMod, const SDL_Scancode ac_sdlScancode)
+void GameLoop::OnKeyUp(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode)
 {
-	switch (ac_sdlSym)
+	switch (symbol)
 	{
 	default: break;
 	}
 }
 void GameLoop::OnExit()
 {
-	m_bRunning = false; // End the loop
+	m_Running = false; // End the loop
 }
 
 GameLoop::GameLoop()
 {
-	m_bRunning = true;
+	m_Running = true;
 }
 GameLoop::~GameLoop()
 {

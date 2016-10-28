@@ -2,15 +2,15 @@
 // File: EventHandler.h
 // Author: Ben Odom
 // Brief: You're not meant to create an object of this class
-//		  This class is created to simply be inherited. 
-//		  By making all virtual functions, each object 
+//		  This class is created to simply be inherited.
+//		  By making all virtual functions, each object
 //        can redefine what happens on that event
 //////////////////////////////////////////////////////////////
 
 #ifndef _EVENTHANDLER_H_
 #define _EVENTHANDLER_H_
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class EventHandler
 {
