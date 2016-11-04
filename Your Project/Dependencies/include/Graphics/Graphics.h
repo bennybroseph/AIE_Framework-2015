@@ -83,7 +83,7 @@ namespace Graphics
 	// - Draws a colored line at with a given beginning and end
 	void DrawLine(const Vector2 &head, const Vector2 &tail, const Vector4 &colour);
 	// - Draws a colored pixel with a given beginning and end
-	void DrawPoint(const Vector2& position, const Vector4 &ac_Color);
+	void DrawPoint(const Vector2& position, const Vector4 &colour);
 	// - Draws a colored ring with a given center, radius, and quality modifier
 	void DrawRing(const Vector2 &center, float radius, float points, const Vector4 &colour);
 	// - Draws a colored circle with a given center, radius, and quality modifier

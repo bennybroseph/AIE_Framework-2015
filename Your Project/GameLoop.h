@@ -25,7 +25,7 @@ class GameLoop : EventHandler
 
 public:
 	// The game loop
-	void Loop();
+	void Run();
 
 	// An update function that gets called directly after input is parsed
 	void Update();
@@ -36,9 +36,9 @@ public:
 	void Draw();
 
 	// Gets called automatically by 'EventHandler' when a key is pressed
-	void OnKeyDown(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode) override;
+	void OnKeyDown(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode scanecode) override;
 	// Gets called automatically by 'EventHandler' when a key is released
-	void OnKeyUp(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode) override;
+	void OnKeyUp(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode scancode) override;
 	// Gets called automatically by 'EventHandler' when the user clicks the 'x' on the window
 	void OnExit() override;
 

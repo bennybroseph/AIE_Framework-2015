@@ -2,7 +2,7 @@
 
 
 
-void GameLoop::Loop()
+void GameLoop::Run()
 {
 	SDL_Event sdlEvent; // Will hold the next event to be parsed
 
@@ -23,6 +23,7 @@ void GameLoop::Loop()
 		LateUpdate();
 
 		Draw();
+		Graphics::Draw();
 
 		Graphics::Flip(); // Required to update the window with all the newly drawn content
 	}
@@ -42,8 +43,8 @@ void GameLoop::Draw()
 	// Objects are drawn in a painter's layer fashion meaning the first object drawn is on the bottom, and the last one drawn is on the top
 	// just like a painter would paint onto a canvas
 
-	Graphics::DrawRect(Vector2(400.f, 400.f), Vector2(450.f, 400.f), Vector4(160.f, 65.f, 255.f, 255.f));
-	Graphics::DrawRect(Vector2(250.f, 500.f), Vector2(1000, 200), Vector4(0.f, 255.f, 0.f, 255.f));
+	Graphics::DrawRect(Vector2(300.f, 300.f), Vector2(450.f, 450.f), Vector4(160.f, 65.f, 255.f, 255.f));
+	Graphics::DrawRect(Vector2(10.f, 100.f), Vector2(200.f, 200.f), Vector4(0.f, 255.f, 0.f, 255.f));
 
 	Graphics::DrawLine(Vector2(10.f, 10.f), Vector2(100.f, 100.f), Vector4(255.f, 255.f, 255.f, 255.f));
 	Graphics::DrawPoint(Vector2(5.f, 5.f), Vector4(255.f, 255.f, 255.f, 255.f));
@@ -52,16 +53,18 @@ void GameLoop::Draw()
 	Graphics::DrawCircle(Vector2(800.f, 450.f), 200.f, 50.f, Vector4(0.f, 255.f, 255.f, 150.f));
 }
 
-void GameLoop::OnKeyDown(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode)
+void GameLoop::OnKeyDown(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode scanecode)
 {
 	switch (symbol)
 	{
-	case SDLK_ESCAPE: m_Running = false; break; // End the loop
+	case SDLK_ESCAPE: m_Running = false; // End the loop
+		break;
 
-	default: printf("%s\n", SDL_GetKeyName(symbol)); break;
+	default: printf("%s\n", SDL_GetKeyName(symbol)); // Prints the key the user Hits to the console
+		break;
 	}
 }
-void GameLoop::OnKeyUp(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode sdlScancode)
+void GameLoop::OnKeyUp(SDL_Keycode symbol, Uint16 modifier, SDL_Scancode scancode)
 {
 	switch (symbol)
 	{
